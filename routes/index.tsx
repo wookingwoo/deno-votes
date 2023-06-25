@@ -6,8 +6,23 @@ export const handler: Handlers = {
     const question = form.get("question")?.toString();
     const option1 = form.get("option_1")?.toString();
     const option2 = form.get("option_2")?.toString();
-    return new Response(`${question} ${option1} ${option2}`, {
+
+    const payload = {
+      id: crypto.randomUUID(),
+      question,
+      option1,
+      option2,
+      option1Votes: 0,
+      option2Votes: 0,
+    };
+
+    const kv = await Deno.openKv();
+    await kv.set([payload.id], JSON.stringify(payload));
+    const headers = new Headers();
+    headers.set("location", `/questions/${payload.id}`);
+    return new Response(null, {
       status: 302,
+      headers: headers,
     });
   },
 };
