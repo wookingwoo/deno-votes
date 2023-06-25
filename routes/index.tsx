@@ -1,5 +1,17 @@
 import { Head } from "https://deno.land/x/fresh@1.2.0/runtime.ts";
 
+export const handler: Handlers = {
+  async POST(req, ctx) {
+    const form = await req.formData();
+    const question = form.get("question")?.toString();
+    const option1 = form.get("option_1")?.toString();
+    const option2 = form.get("option_2")?.toString();
+    return new Response(`${question} ${option1} ${option2}`, {
+      status: 302,
+    });
+  },
+};
+
 export default function Home() {
   return (
     <>
