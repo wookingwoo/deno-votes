@@ -1,4 +1,5 @@
-import { Head } from "https://deno.land/x/fresh@1.2.0/runtime.ts";
+import { Head } from "$fresh/runtime.ts";
+import { Handlers } from "$fresh/server.ts";
 
 export const handler: Handlers = {
   async POST(req, ctx) {
