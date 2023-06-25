@@ -17,6 +17,7 @@ export const handler: Handlers = {
     };
 
     const kv = await Deno.openKv();
+
     await kv.set([payload.id], JSON.stringify(payload));
     const headers = new Headers();
     headers.set("location", `/questions/${payload.id}`);
@@ -75,7 +76,7 @@ export default function Home() {
             </div>
           </div>
 
-          <button class="w-full bg-gray-800 text-white text cl rounded-md mb-2 p-2">
+          <button class="w-full bg-gray-800 text-white text-xl rounded-md mb-2 p-2">
             Ask away!
           </button>
         </form>
